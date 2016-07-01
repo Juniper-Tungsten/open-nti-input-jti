@@ -30,8 +30,16 @@ RUN apk --no-cache --update add \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-RUN gem install --no-ri --no-rdoc \
-            fluent-plugin-juniper-telemetry -v ${FLUENTD_JUNIPER_VERSION}
+# RUN gem install --no-ri --no-rdoc \
+#             fluent-plugin-juniper-telemetry -v ${FLUENTD_JUNIPER_VERSION}
+
+RUN     apk --no-cache --update add git &&\
+        rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+
+WORKDIR /home/fluent
+RUN     git clone https://github.com/JNPRAutomate/fluent-plugin-juniper-telemetry.git
+RUN     cp /home/fluent/fluent-plugin-juniper-telemetry/lib/fluent/plugin/*.rb /fluentd/plugins
+ENV     RUBYLIB   /home/fluent/fluent-plugin-juniper-telemetry/lib
 
 # Copy Start script to generate configuration dynamically
 ADD     fluentd-alpine.start.sh         fluentd-alpine.start.sh
