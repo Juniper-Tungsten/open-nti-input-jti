@@ -38,6 +38,8 @@ RUN     apk --no-cache --update add git &&\
 
 WORKDIR /home/fluent
 RUN     git clone https://github.com/JNPRAutomate/fluent-plugin-juniper-telemetry.git
+RUN     cd fluent-plugin-juniper-telemetry &&\
+        git checkout v2.0
 RUN     cp /home/fluent/fluent-plugin-juniper-telemetry/lib/fluent/plugin/*.rb /fluentd/plugins
 ENV     RUBYLIB   /home/fluent/fluent-plugin-juniper-telemetry/lib
 
