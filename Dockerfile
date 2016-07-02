@@ -22,13 +22,14 @@ RUN apk --no-cache --update add \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --no-ri --no-rdoc \
               influxdb \
-              protobuf \
               statsd-ruby \
               dogstatsd-ruby \
               ruby-kafka yajl ltsv zookeeper \
               bigdecimal && \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+
+RUN     gem install --prerelease protobuf
 
 # RUN gem install --no-ri --no-rdoc \
 #             fluent-plugin-juniper-telemetry -v ${FLUENTD_JUNIPER_VERSION}
