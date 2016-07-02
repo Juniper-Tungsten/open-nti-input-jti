@@ -56,6 +56,7 @@ ENV OUTPUT_KAFKA=false \
     OUTPUT_STDOUT=false \
     PORT_JTI=50000 \
     PORT_ANALYTICSD=50020 \
+    PORT_JTI_OC=50030 \
     INFLUXDB_ADDR=localhost \
     INFLUXDB_PORT=8086 \
     INFLUXDB_DB=juniper \
