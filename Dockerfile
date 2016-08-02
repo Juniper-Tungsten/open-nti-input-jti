@@ -49,6 +49,9 @@ ADD     fluentd-alpine.start.sh         fluentd-alpine.start.sh
 RUN     chown -R fluent:fluent fluentd-alpine.start.sh
 RUN     chmod 777 fluentd-alpine.start.sh
 
+COPY    fluent.conf /fluentd/etc/fluent.conf
+COPY    plugins /fluentd/plugins
+
 USER fluent
 EXPOSE 24284
 
