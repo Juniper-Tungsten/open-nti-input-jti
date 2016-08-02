@@ -21,6 +21,7 @@ RUN apk --no-cache --update add \
                             ruby-dev && \
     apk add bash && \
     apk add tcpdump && \
+    apk add sudo && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --no-ri --no-rdoc \
               influxdb \
@@ -42,6 +43,8 @@ RUN     chmod 777 fluentd-alpine.start.sh
 
 COPY    fluent.conf /fluentd/etc/fluent.conf
 COPY    plugins /fluentd/plugins
+
+RUN echo "fluent ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER fluent
 EXPOSE 24284
