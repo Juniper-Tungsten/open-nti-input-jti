@@ -33,9 +33,6 @@ RUN apk --no-cache --update add \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-# RUN gem install --no-ri --no-rdoc \
-#             fluent-plugin-juniper-telemetry -v ${FLUENTD_JUNIPER_VERSION}
-
 RUN     apk --no-cache --update add git &&\
         rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
