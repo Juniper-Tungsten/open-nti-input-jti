@@ -25,11 +25,11 @@ RUN apk --no-cache --update add \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --no-ri --no-rdoc \
               influxdb \
-              protobuf \
               statsd-ruby \
               dogstatsd-ruby \
               ruby-kafka yajl ltsv zookeeper \
               bigdecimal && \
+    gem install --prerelease protobuf &&\
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
