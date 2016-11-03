@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v0.12.24
+FROM fluent/fluentd:v0.12.26
 MAINTAINER Damien Garros <dgarros@gmail.com>
 
 ENV FLUENTD_JUNIPER_VERSION 0.2.11
@@ -19,6 +19,9 @@ ENV PATH /home/fluent/.gem/ruby/2.2.0/bin:$PATH
 RUN apk --no-cache --update add \
                             build-base \
                             ruby-dev && \
+    apk add bash && \
+    apk add tcpdump && \
+    apk add sudo && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install --no-ri --no-rdoc \
               influxdb \
@@ -42,9 +45,14 @@ RUN     cp /home/fluent/fluent-plugin-juniper-telemetry/lib/fluent/plugin/*.rb /
 ENV     RUBYLIB   /home/fluent/fluent-plugin-juniper-telemetry/lib
 
 # Copy Start script to generate configuration dynamically
-ADD     fluentd-alpine.start.sh         fluentd-alpine.start.sh
+ADD     fluentd-alpine.start.sh   fluentd-alpine.start.sh
 RUN     chown -R fluent:fluent fluentd-alpine.start.sh
 RUN     chmod 777 fluentd-alpine.start.sh
+
+COPY    fluent.conf /fluentd/etc/fluent.conf
+COPY    plugins /fluentd/plugins
+
+RUN echo "fluent ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER fluent
 EXPOSE 24284
