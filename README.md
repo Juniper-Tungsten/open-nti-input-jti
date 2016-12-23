@@ -1,5 +1,6 @@
-![Beta](https://img.shields.io/badge/status-beta-yellowgreen.svg?style=flat "Beta")
-![Community](https://img.shields.io/badge/support-community-blue.svg?style=flat "Community")
+![status deprecated](https://img.shields.io/badge/status-deprecated-lightgrey.svg)  
+
+> This project is has been moved into the main repository https://github.com/Juniper/open-nti and this repo is now deprecated
 
 # open-nti-input-jti
 
